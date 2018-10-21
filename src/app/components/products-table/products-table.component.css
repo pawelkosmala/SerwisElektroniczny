@@ -1,4 +1,12 @@
 h2 {
-  display: inline-block;
-  margin-left: 5px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.btn,
+button {
+    cursor: pointer;
+}
+input {
+margin-right: 10px;
 }

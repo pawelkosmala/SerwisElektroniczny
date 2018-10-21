@@ -1,41 +1,78 @@
 <div class="row">
     <div class="col-md-1">
-        <a [routerLink]="['']" href="" class="btn btn-secondary"><i class="fa fa-arrow-circle-o-left"></i> Powrót</a>
+        <a [routerLink]="['/category/'+categoryId]" href="" class="btn btn-secondary"><i class="fa fa-arrow-circle-o-left"></i> Powrót</a>
     </div>
-    <div class="col-md-5"><h2>Szczegóły Produktu</h2></div>
+    <div class="col-md-5">
+        <h2>Szczegóły Produktu</h2>
+    </div>
     <div class="col-md-6"></div>
     <div class="col-md-2"></div>
-  </div>
-  <table *ngIf="parameters?.length > 0; else noParameters" class="table table-striped">
+</div>
+<table *ngIf="parameters?.length > 0; else noParameters" class="table table-striped">
     <thead class="thead-inverse">
-      <tr>
-        <th>Id Parametru</th>
-        <th>Nazwa</th>
-        <th>Wartość</th>
-      </tr>
+        <tr>
+            <th>Id Parametru</th>
+            <th>Nazwa</th>
+            <th>Wartość</th>
+            <th>
+                <button class="btn btn-success" (click)="toggleParameterEditMode()" *ngIf="!isParameterEditMode">Dodaj parametr</button>
+                <button class="btn btn-danger" (click)="toggleParameterEditMode()" *ngIf="isParameterEditMode">Anuluj</button>
+            </th>
+        </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let parameter of parameters">
-        <td>{{parameter.parameter_id}}</td>
-        <td>{{parameter.parameter_name}}</td>
-        <td>{{parameter.parameter_value}}</td>
-      </tr>
+        <tr *ngFor="let parameter of parameters">
+            <td>{{parameter.parameter_id}}</td>
+            <td>{{parameter.parameter_name}}</td>
+            <td>{{parameter.parameter_value}}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" (click)="deleteParameter(parameter.parameter_id)">Usuń</button>
+            </td>
+        </tr>
     </tbody>
-  </table>
+</table>
 
-  <ng-template #noParameters>
-    <hr>
-    <h5>Brak produktów</h5>
-  </ng-template>
-
-  <div class="card">
-    <div class="card-body" *ngIf="comments?.length > 0; else noComments">
-      <h5 class="card-title">Komentarze </h5>
-      <ul class="list-group list-group-flush" *ngFor="let comment of comments">
-        <li class="list-group-item"></li>
-      </ul>
+<ng-template #noParameters>
+    <div class="d-flex justify-content-between">
+        <h5>Brak parametrów</h5>
+        <button class="btn btn-success" (click)="toggleParameterEditMode()" *ngIf="!isParameterEditMode">Dodaj parametr</button>
+        <button class="btn btn-danger" (click)="toggleParameterEditMode()" *ngIf="isParameterEditMode">Anuluj</button>
     </div>
-  </div>
-  <ng-template #noComments>
-    <h5>Brak komentarzy</h5>
-  </ng-template>
+</ng-template>
+
+<ng-container *ngIf="isParameterEditMode">
+    <div>
+        <input type="text" placeholder="Nazwa parametru" #newParameterName>
+        <input type="text" placeholder="Wartość" #newParameterValue>
+        <button class="btn btn-success" (click)="saveNewParameter(newParameterName.value, newParameterValue.value)">Zapisz</button>
+    </div>
+</ng-container>
+
+<div class="card mt-5">
+    <div class="card-body" *ngIf="comments?.length > 0; else noComments">
+        <div class="card-title d-flex justify-content-between">
+            <h3>Komentarze</h3>
+            <button class="btn btn-success" (click)="toggleCommentEditMode()" *ngIf="!isCommentEditMode">Dodaj komentarz</button>
+            <button class="btn btn-danger" (click)="toggleCommentEditMode()" *ngIf="isCommentEditMode">Anuluj</button>
+        </div>
+
+        <ul class="list-group list-group-flush" *ngFor="let comment of comments">
+            <li class="list-group-item d-flex justify-content-between">
+                {{ comment.comment_content }}
+                <button class="btn btn-danger" (click)="deleteComment(comment.comment_id)">Usuń komentarz</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<ng-template #noComments>
+    <div class="card-title d-flex justify-content-between">
+        <h5>Brak komentarzy</h5>
+        <button class="btn btn-success" (click)="toggleCommentEditMode()">Dodaj komentarz</button>
+    </div>
+</ng-template>
+<ng-container *ngIf="isCommentEditMode">
+    <div>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Treść komentarza" #newComment (keyup.enter)="saveNewComment(newComment.value)"></textarea>
+        <button class="btn btn-success col-md-12" (click)="saveNewComment(newComment.value)">Zapisz</button>
+    </div>
+</ng-container>
