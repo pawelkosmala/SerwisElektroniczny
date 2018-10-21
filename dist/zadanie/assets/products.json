@@ -1,0 +1,25 @@
+[{
+        "category_id": 1,
+        "product_id": 1,
+        "product_name": "Lodówka Samsung",
+        "product_status": 0
+    },
+    {
+        "category_id": 1,
+        "product_id": 2,
+        "product_name": "Lodówka Benq",
+        "product_status": 1
+    },
+    {
+        "category_id": 2,
+        "product_id": 3,
+        "product_name": "Mikrofalówka Razer",
+        "product_status": 0
+    },
+    {
+        "category_id": 3,
+        "product_id": 4,
+        "product_name": "Kosiarka Renault",
+        "product_status": 0
+    }
+]

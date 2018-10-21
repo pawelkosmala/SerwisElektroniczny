@@ -1,0 +1,11 @@
+[{
+        "product_id": 1,
+        "comment_id": 1,
+        "comment_content": "10/10, nie działa"
+    },
+    {
+        "product_id": 1,
+        "comment_id": 2,
+        "comment_content": "Zamrażarka grzeje"
+    }
+]
