@@ -1,0 +1,10 @@
+{
+  "product_parameters": [
+    {
+      "product_id": 1,
+      "parameter_id": 1,
+      "parameter_name": "Rozdzielczosc",
+      "parameter_value": "1920x1920"
+    }
+  ]
+}

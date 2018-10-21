@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-1">
+        <a [routerLink]="['']" href="" class="btn btn-secondary"><i class="fa fa-arrow-circle-o-left"></i> Powrót</a>
+    </div>
+    <div class="col-md-5"><h2>Szczegóły Produktu</h2></div>
+    <div class="col-md-6"></div>
+    <div class="col-md-2"></div>
+  </div>
+  <table *ngIf="parameters?.length > 0; else noParameters" class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Id Parametru</th>
+        <th>Nazwa</th>
+        <th>Wartość</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parameter of parameters">
+        <td>{{parameter.parameter_id}}</td>
+        <td>{{parameter.parameter_name}}</td>
+        <td>{{parameter.parameter_value}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noParameters>
+    <hr>
+    <h5>Brak produktów</h5>
+  </ng-template>
+
+  <div class="card">
+    <div class="card-body" *ngIf="comments?.length > 0; else noComments">
+      <h5 class="card-title">Komentarze </h5>
+      <ul class="list-group list-group-flush" *ngFor="let comment of comments">
+        <li class="list-group-item"></li>
+      </ul>
+    </div>
+  </div>
+  <ng-template #noComments>
+    <h5>Brak komentarzy</h5>
+  </ng-template>
